@@ -6,7 +6,7 @@
 
 ## 2、使用技术与开发环境：
 （1）该系统主要使用Struts2+Spring+Hibernate框架+JSP+Mysql搭建。<br/>
-（2）该系统的开发环境是：Ecplise+JDK1.8+Tomcat9+Struts2.3.24+Spring+4.3.9+Hibernate+Hibernate5.0.9+Mysql5.0.4<br/>
+（2）该系统的开发环境是：Ecplise+JDK1.8+Tomcat9+Struts2.3.24+Spring+4.3.9Hibernate5.0.9+Mysql5.0.4<br/>
 （3）系统主要分成四层：视图层+web层+service层+Dao层：<br/>
 &ensp; &ensp; 视图层主要使用JSP编写;<br/>
 &ensp; &ensp; Struts2主要负责web层的管理;<br/>
