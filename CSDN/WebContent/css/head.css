@@ -1,0 +1,27 @@
+.head{
+	margin:0 auto;
+	width:1000px;
+	height:140px;
+	background:url(../images/bground.jpg) no-repeat;
+	background-size:cover;
+	border:1px solid gray;
+}
+.pic{
+	float:left;
+	width:138px;
+	height:138px;
+	border:1px solid gray;
+}
+.font1{
+	margin-left:5px;
+	margin-top:10px;
+	line-height:29px;
+}
+.tabs{
+	width:120%;
+}
+.tabs li{
+	list-style:none;
+	float:left;
+	width:70px;
+}

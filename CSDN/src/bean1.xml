@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 引入数据库连接信息文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<!-- 把hibernate的sessionFactory在spring配置文件中创建 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 注入dataSource属性 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 指定hibernate核心配置文件的位置 -->
+		<property name="configLocations" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+	
+	
+	<!-- 配置事务 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<!-- 注入sessionFactory，因为sessionFactory里面包含了dataSource对象 -->
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	
+	<!-- 创建useraction -->
+	<bean id="useraction" class="com.zwp.action.useraction" scope="prototype">
+		<property name="userService" ref="userService"></property>
+		<property name="typeService" ref="typeService"></property>
+		<property name="articleService" ref="articleService"></property>
+	</bean>
+	<bean id="userService" class="com.zwp.service.UserService">
+		<property name="userDao" ref="userDaoImpl"></property>
+	</bean>
+	<bean id="userDaoImpl" class="com.zwp.dao.UserDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 创建typeaction -->
+	<bean id="typeaction" class="com.zwp.action.typeaction" scope="prototype">
+		<property name="typeService" ref="typeService"></property>
+	</bean>
+	<bean id="typeService" class="com.zwp.service.TypeService">
+		<property name="typeDao" ref="typeDaoImpl"></property>
+	</bean>
+	<bean id="typeDaoImpl" class="com.zwp.dao.TypeDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 创建articleaction -->
+	<bean id="articleaction" class="com.zwp.action.Articleaction" scope="prototype">
+		<property name="articleService" ref="articleService"></property>
+		<property name="typeService" ref="typeService"></property>
+		<property name="belongService" ref="belongService"></property>
+		<property name="discussService" ref="discussService"></property>
+		<property name="replyService" ref="replyService"></property>
+	</bean>
+	<bean id="articleService" class="com.zwp.service.ArticleService">
+		<property name="articleDao" ref="articleDaoImpl"></property>
+	</bean>
+	<bean id="articleDaoImpl" class="com.zwp.dao.ArticleDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 创建belongAction -->
+	<bean id="belongAction" class="com.zwp.action.BelongAction" scope="prototype">
+		<property name="belongService" ref="belongService"></property>
+		<property name="typeService" ref="typeService"></property>
+		<property name="articleService" ref="articleService"></property>
+	</bean>
+	<bean id="belongService" class="com.zwp.service.BelongService">
+		<property name="belongDao" ref="belongDaoImpl"></property>
+	</bean>
+	<bean id="belongDaoImpl" class="com.zwp.dao.BelongDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 创建discussAction -->
+	<bean id="discussAction" class="com.zwp.action.DiscussAction" scope="prototype">
+		<property name="discussService" ref="discussService"></property>
+	</bean>
+	<bean id="discussService" class="com.zwp.service.DiscussService">
+		<property name="discussDao" ref="discussDaoImpl"></property>
+	</bean>
+	<bean id="discussDaoImpl" class="com.zwp.dao.DiscussDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 创建manageAction -->
+	<bean id="manageAction" class="com.zwp.action.ManageAction" scope="prototype">
+		<property name="manageService" ref="manageService"></property>
+		<property name="userService" ref="userService"></property>
+		<property name="articleService" ref="articleService"></property>
+	</bean>
+	<bean id="manageService" class="com.zwp.service.ManageService">
+		<property name="manageDao" ref="manageDaoImpl"></property>
+	</bean>
+	<bean id="manageDaoImpl" class="com.zwp.dao.ManageDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+		<!-- 创建replyAction -->
+	<bean id="replyAction" class="com.zwp.action.ReplyAction" scope="prototype">
+		<property name="replyService" ref="replyService"></property>
+	</bean>
+	<bean id="replyService" class="com.zwp.service.ReplyService">
+		<property name="replyDao" ref="replyDaoImpl"></property>
+	</bean>
+	<bean id="replyDaoImpl" class="com.zwp.dao.ReplyDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+
+	<!-- 创建 HibernateTemplate对象-->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<!-- 注入的是sessionFactory对象，不是dataSource对象 -->	
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+      <!-- 上传文件 -->
+  	  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   		<!-- 设置上传文件最大尺寸 -->
+  <!--  		<property name="maxUploadSize">
+   			<value>5242880</value>
+   		</property> -->
+   	 </bean>
+
+</beans>

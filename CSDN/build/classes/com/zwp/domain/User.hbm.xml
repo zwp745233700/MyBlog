@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 创建映射配置文件 -->
+<hibernate-mapping>
+	<class name="com.zwp.domain.User" table="user" >
+	
+		<id name="uid" column="uid">
+		<generator class="native"></generator>		
+		</id>
+		
+		<property name="username" column="username"></property>
+		<property name="password" column="password"></property>
+		<property name="headPic" column="headPic"></property>
+		<property name="realname" column="realname"></property>
+		<property name="profession" column="profession"></property>
+		<property name="work" column="work"></property>
+		<property name="resume" type="text">
+			<column name="resume" length ="16777216" />
+		</property>
+		<property name="sex" column="sex"></property>
+		<property name="country" column="country"></property>
+
+		
+		<set name="setarticle" cascade="save-update,delete" inverse="true">
+			<key column="auid"></key>
+			<one-to-many class="com.zwp.domain.article" />
+		</set>
+		<set name="setmytype" cascade="save-update,delete" inverse="true">
+			<key column="umid"></key>
+			<one-to-many class="com.zwp.domain.mytype" />
+		</set>
+		<set name="setDiscuss" cascade="save-update,delete" inverse="true">
+			<key column="userId"></key>
+			<one-to-many class="com.zwp.domain.Discuss" />
+		</set>
+		<set name="setReply" cascade="save-update,delete" inverse="true">
+			<key column="userId"></key>
+			<one-to-many class="com.zwp.domain.User" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

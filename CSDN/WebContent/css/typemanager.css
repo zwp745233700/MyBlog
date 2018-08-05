@@ -1,0 +1,19 @@
+.typemanager{
+	margin-top:5px;
+	margin:0 auto;
+	width:1000px;
+	border:1px solid gray;
+}
+.table1{
+	margin:0 auto;
+	border:1px solid;
+	width:1000px;
+}
+.add{
+	margin:0 auto;
+	width:450px;
+}
+.edit2{
+	float:left;
+	display:none;
+}

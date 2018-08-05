@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 创建映射配置文件 -->
+<hibernate-mapping>
+	<class name="com.zwp.domain.mytype" table="mytype">
+	
+		<id name="mtid" column="mtid">
+		<generator class="native"></generator>		
+		</id>
+		
+		<property name="mytag" column="mytag"></property>
+		
+		<set name="setBelong" cascade="save-update,delete" inverse="true">
+			<key column="mbid"></key>
+			<one-to-many class="com.zwp.domain.Belong" />
+		</set>
+		
+		<many-to-one name="user" class="com.zwp.domain.User" column="umid"></many-to-one>
+	</class>
+</hibernate-mapping>

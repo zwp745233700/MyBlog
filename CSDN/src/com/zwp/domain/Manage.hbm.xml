@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 创建映射配置文件 -->
+<hibernate-mapping>
+	<class name="com.zwp.domain.Manage" table="manage" >
+	
+		<id name="mid" column="mid">
+		<generator class="native"></generator>		
+		</id>
+		
+		<property name="musername" column="musername"></property>
+		<property name="mpassword" column="mpassword"></property>
+
+	</class>
+</hibernate-mapping>

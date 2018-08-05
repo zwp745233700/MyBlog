@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+		<package name="csdn_1" extends="struts-default" namespace="/">
+		
+			<action name="useraction_*" class="useraction" method="{1}">
+				<result name="login">/index.jsp</result>
+				<result name="toregister">/WEB-INF/register.jsp</result>
+				<result name="towritePage">/WEB-INF/writeboke.jsp</result>
+				<result name="topersonView">/WEB-INF/personView.jsp</result>
+				<result name="toeditUserView">/WEB-INF/editUser.jsp</result>
+				<result name="toUpdHeadView">/WEB-INF/updHeadView.jsp</result>
+				<result name="updsuccess" type="redirectAction">useraction_topersonView</result>
+				<result name="loginsuccess" type="redirectAction">useraction_writeboke</result>
+			</action>
+			
+			<action name="typeaction_*" class="typeaction" method="{1}">
+				<result name="totypePage">/WEB-INF/typemanager.jsp</result>
+				<result name="totypePage1" type="redirectAction">typeaction_findType</result>
+			</action>
+			
+			<action name="articleaction_*" class="articleaction" method="{1}">
+				<result name="manageView">/WEB-INF/articlemanage.jsp</result>
+				<result name="todraftsView">/WEB-INF/draftsView.jsp</result>
+				<result name="torecycleView">/WEB-INF/recycleView.jsp</result>
+				<result name="toUpdateView">/WEB-INF/updateArticle.jsp</result>
+				<result name="AddArticleByDraftsView">/WEB-INF/addArticleByDraftsView.jsp</result>
+				<result name="Tomanage" type="redirectAction">articleaction_manage</result>
+				<result name="Todrafts" type="redirectAction">articleaction_todraftsView</result>
+				<result name="cancelsuccess" type="redirectAction">articleaction_torecycleView</result>
+				<result name="delsuccess" type="redirectAction">articleaction_torecycleView</result>
+				<result name="todraftsview" type="redirectAction">articleaction_todraftsView</result>
+				<result name="ToSeeView">/WEB-INF/SeeView.jsp</result>
+				<result name="ToManageSeeView">/WEB-INF/ManangeSeeView.jsp</result>
+				<result name="toMyblok">/WEB-INF/Myblok.jsp</result>
+				<result name="toFirstView">/WEB-INF/FirstView.jsp</result>
+			</action>
+
+			<action name="belongAction_*" class="belongAction" method="{1}">
+				<result name="ToupdbelongView">/WEB-INF/articleType.jsp</result>
+				<result name="ToupdbelongView2">/WEB-INF/articleTypeByDrafts.jsp</result>
+				<result name="Tomanage" type="redirectAction">articleaction_manage</result>
+				<result name="ToDraftsView" type="redirectAction">articleaction_todraftsView</result>
+			</action>
+			
+			<action name="discussAction_*" class="discussAction" method="{1}">
+				<result name="toDisManagerView">/WEB-INF/discussManage.jsp</result>
+				<result name="refrush" type="redirectAction">articleaction_SelectOne</result>
+				<result name="OK">/WEB-INF/DisOK.jsp</result>
+				<result name="delOk">/WEB-INF/delOk.jsp</result>
+				
+			</action>
+			
+			<action name="manageAction_*" class="manageAction" method="{1}">
+				<result name="mloginsuccess">/WEB-INF/ManagerView.jsp</result>
+				<result name="login">manageIndex.jsp</result>
+				<result name="ManageUserView">/WEB-INF/ManageUserView.jsp</result>
+				<result name="toManageUserView" type="redirectAction">manageAction_manageUser</result>
+				<result name="ManageArticleView">/WEB-INF/ManageArticleView.jsp</result>
+				<result name="IfPass" type="redirectAction">manageAction_manageArticle</result>
+			</action>
+				
+			<action name="replyAction_*" class="replyAction" method="{1}">
+				<result name="replyOk">/WEB-INF/replyOk.jsp</result>
+			</action>
+		</package>
+	</struts>
+	
+	
+	

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 创建映射配置文件 -->
+<hibernate-mapping>
+	<class name="com.zwp.domain.Type" table="type">
+	
+		<id name="typeId" column="typeId">
+		<generator class="uuid"></generator>		
+		</id>
+		<property name="type" column="type"></property>
+		
+		<set name="setarticle" cascade="save-update,delete" inverse="true">
+			<key column="atid"></key>
+			<one-to-many class="com.zwp.domain.article" />
+		</set>
+	</class>
+</hibernate-mapping>

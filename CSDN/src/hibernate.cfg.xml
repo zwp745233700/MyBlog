@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- <property name="hibernate.show_sql">true</property> -->
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- 把映射文件放到核心配置文件中 -->
+		<mapping resource="com/zwp/domain/User.hbm.xml" />	
+		<mapping resource="com/zwp/domain/article.hbm.xml" />	
+		<mapping resource="com/zwp/domain/mytype.hbm.xml" />	
+		<mapping resource="com/zwp/domain/FirstType.hbm.xml" />	
+		<mapping resource="com/zwp/domain/Type.hbm.xml" />	
+		<mapping resource="com/zwp/domain/Belong.hbm.xml" />
+		<mapping resource="com/zwp/domain/State.hbm.xml" />
+		<mapping resource="com/zwp/domain/Discuss.hbm.xml" />
+		<mapping resource="com/zwp/domain/Manage.hbm.xml" />
+		<mapping resource="com/zwp/domain/Reply.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

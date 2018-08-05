@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 创建映射配置文件 -->
+<hibernate-mapping>
+	<class name="com.zwp.domain.Discuss" table="discuss" >
+	
+		<id name="disId" column="disId">
+			<generator class="native"></generator>		
+		</id>
+		
+		<property name="disContent" type="text">
+			<column name="disContent" length ="16777216" />
+		</property>
+		<property name="date" column="date"></property>
+		<many-to-one name="user" class="com.zwp.domain.User" column="userId"></many-to-one>
+		<many-to-one name="article" class="com.zwp.domain.article" column="articleId"></many-to-one>
+		
+		<set name="setReply" cascade="save-update,delete" inverse="true">
+			<key column="discussId"></key>
+			<one-to-many class="com.zwp.domain.Reply" />
+		</set>
+		
+	</class>
+</hibernate-mapping>
